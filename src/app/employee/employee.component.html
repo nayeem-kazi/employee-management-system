@@ -1,0 +1,318 @@
+<div class="container">
+    <div>
+        <!-- button trigger modal  -->
+        <button class="btn btn-outline-success btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModalToggle"
+            (click)="add()">
+            ADD NEW EMPLOYEE
+        </button>
+    </div>
+    <hr>
+    <div *ngFor="let employee of employees, let i = index">
+        <div class="row width-75 border border-3 rounded-3 border-success p-3 mt-2 shadow">
+            <div class="col col-md-2">
+                <div class="row">
+                    <div class="fs-2 bolder text-danger">
+                        #{{i+1}}
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="align-middle">
+                        <img class="border border-success rounded-circle pro-pic"
+                            src="../../assets/image/{{employee.photo}}" alt="profile-pic">
+                    </div>
+                </div>
+
+            </div>
+            <div class="col col-md-10">
+                <div class="row">
+                    <div class="col col-md-10 text-center fw-bolder">
+                        <span class="border border-success rounded p-2 fs-4 text-danger">
+                            {{employee.name|uppercase}}
+                        </span>
+                    </div>
+                    <div class="col col-md-2">
+                        <div class="btn-group" role="group" aria-label="Basic outlined example">
+                            <button type="button" class="btn btn-outline-success" data-bs-toggle="modal"
+                                data-bs-target="#exampleModalToggle" (click)="getEmployee(employee)">Edit</button>
+                            <button type="button" class="btn btn-outline-danger"
+                                (click)="deleteEmployee(employee)">Delete</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-md-6">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <td colspan="2" class="text-center fs-4 fw-bold text-success">Personal Information
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>ID</td>
+                                    <td>{{employee.id}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Email</td>
+                                    <td>{{employee.email}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Gender</td>
+                                    <td>{{employee.gender}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Birthday</td>
+                                    <td>{{employee.dob|date:'mediumDate'}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col col-md-6">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <td colspan="2" class="text-center fs-4 fw-bold text-success">Job Details</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Designation</td>
+                                    <td>{{employee.designation}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Department</td>
+                                    <td>{{employee.department}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Joining Date</td>
+                                    <td>{{employee.joiningDate|date:'mediumDate'}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Salary Code</td>
+                                    <td>{{employee.salaryCode}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- footer  -->
+    <footer>
+        <div style="height: 100px;">
+
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Employee Information Form</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3 row">
+                        <label for="id" class="col-sm-3 col-form-label">Employee ID</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="id" #id1="ngModel" [(ngModel)]="newEmployee.id">
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="name" class="col-sm-3 col-form-label">Full Name</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="name" #name1="ngModel"
+                                [(ngModel)]="newEmployee.name">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="email" class="col-sm-3 col-form-label">Email</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="email" #email1="ngModel"
+                                [(ngModel)]="newEmployee.email">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="dob" class="col-sm-3 col-form-label">Date of Birth</label>
+                        <div class="col-sm-9">
+                            <input type="date" class="form-control" id="dob" #dob1="ngModel"
+                                [(ngModel)]="newEmployee.dob">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="photo" class="col-sm-3 col-form-label">Photo</label>
+                        <div class="col-sm-9">
+                            <input type="file" class="form-control" id="photo" #photo1="ngModel"
+                                [(ngModel)]="newEmployee.photo">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="gender" class="col-sm-3 col-form-label">Gender</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="gender" #gender1="ngModel"
+                                [(ngModel)]="newEmployee.gender">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="designation" class="col-sm-3 col-form-label">Designation</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="designation" #designation1="ngModel"
+                                [(ngModel)]="newEmployee.designation">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="department" class="col-sm-3 col-form-label">Department</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="department" #department1="ngModel"
+                                [(ngModel)]="newEmployee.department">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="joiningDate" class="col-sm-3 col-form-label">Joining Date</label>
+                        <div class="col-sm-9">
+                            <input type="date" class="form-control" id="joiningDate" #joiningDate1="ngModel"
+                                [(ngModel)]="newEmployee.joiningDate">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="salaryCode" class="col-sm-3 col-form-label">Salary Code</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="salaryCode" #salaryCode1="ngModel"
+                                [(ngModel)]="newEmployee.salaryCode">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal"
+                        (click)="addNewEmployee()">Save Information</button>
+                    <button type="button" class="btn btn-outline-warning" data-bs-dismiss="modal"
+                        (click)="updateEmployee()">Update Information</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal two  -->
+
+    <div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+        tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalToggleLabel">Personal Information</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3 row">
+                        <label for="id" class="col-sm-3 col-form-label">Employee ID</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="id" #id1="ngModel" [(ngModel)]="newEmployee.id">
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="name" class="col-sm-3 col-form-label">Full Name</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="name" #name1="ngModel"
+                                [(ngModel)]="newEmployee.name">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="email" class="col-sm-3 col-form-label">Email</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="email" #email1="ngModel"
+                                [(ngModel)]="newEmployee.email" required pattern="^[a-zA-Z0-9_.]+[@][a-zA-Z]+[.][a-zA-Z]{2,3}$">
+                                
+                        </div>
+                        <ul class="list-unstyled text-danger" *ngIf="email1.invalid || email1.dirty">
+                            <li *ngIf="email1.errors?.['required']">This Field is Required</li>
+                            <li *ngIf="email1.errors?.['pattern']">Enter a valid Email</li>
+                          </ul>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="dob" class="col-sm-3 col-form-label">Date of Birth</label>
+                        <div class="col-sm-9">
+                            <input type="date" class="form-control" id="dob" #dob1="ngModel"
+                                [(ngModel)]="newEmployee.dob">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="photo" class="col-sm-3 col-form-label">Photo</label>
+                        <div class="col-sm-9">
+                            <input type="file" class="form-control" id="photo" #photo1="ngModel"
+                                [(ngModel)]="newEmployee.photo">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="gender" class="col-sm-3 col-form-label">Gender</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="gender" #gender1="ngModel"
+                                [(ngModel)]="newEmployee.gender">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline-primary" data-bs-target="#exampleModalToggle2" data-bs-toggle="modal"
+                        data-bs-dismiss="modal">NEXT</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModalToggle2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2"
+        tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalToggleLabel2">JOB Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3 row">
+                        <label for="designation" class="col-sm-3 col-form-label">Designation</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="designation" #designation1="ngModel"
+                                [(ngModel)]="newEmployee.designation">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="department" class="col-sm-3 col-form-label">Department</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="department" #department1="ngModel"
+                                [(ngModel)]="newEmployee.department">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="joiningDate" class="col-sm-3 col-form-label">Joining Date</label>
+                        <div class="col-sm-9">
+                            <input type="date" class="form-control" id="joiningDate" #joiningDate1="ngModel"
+                                [(ngModel)]="newEmployee.joiningDate">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="salaryCode" class="col-sm-3 col-form-label">Salary Code</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="salaryCode" #salaryCode1="ngModel"
+                                [(ngModel)]="newEmployee.salaryCode">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline-primary" data-bs-target="#exampleModalToggle" data-bs-toggle="modal"
+                        data-bs-dismiss="modal">PREVIOUS</button>
+                    <button type="button" [ngClass]="{'btn-outline-warning':sts}" class="btn btn-outline-success"
+                        data-bs-dismiss="modal" (click)="sts?updateEmployee():addNewEmployee()">
+                        {{sts?'UPDATE':"SAVE"}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
